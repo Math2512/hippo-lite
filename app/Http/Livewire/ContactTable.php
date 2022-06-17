@@ -13,7 +13,7 @@ class ContactTable extends Component
     public $search = '';
     public $field ='name';
     public $sortDirection = 'asc';
-    
+
     //protected $queryString = ['field', 'sortDirection'];
 
     public function sortBy($field)
@@ -23,8 +23,8 @@ class ContactTable extends Component
             : 'asc';
 
         $this->field = $field;
-    } 
-    
+    }
+
     public function updatingSearch(): void
     {
         $this->gotoPage(1);
@@ -32,7 +32,7 @@ class ContactTable extends Component
 
     public function render()
     {
-        $contacts = Contact::search('name', $this->search)->orderBy($this->field, $this->sortDirection)->paginate(5);
+        $contacts = Contact::search('name', $this->search)->orderBy($this->field, $this->sortDirection)->paginate(10);
         return view('livewire.contact-table', compact('contacts'));
     }
 }

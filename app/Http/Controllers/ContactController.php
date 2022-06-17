@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use App\Http\Services\ContactService;
 
 class ContactController extends Controller
 {
+    private $contactService;
+
+    public function __construct(ContactService $contactService)
+    {
+        $this->contactService = $contactService;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,18 +23,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::all();
+        $contacts = Contact::Contacts();
         return view("contacts.index", compact('contacts'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -36,7 +35,10 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->contactService->create(new Contact(), $request);
+
+        $contacts = Contact::Contacts();
+        return view("contacts.index", compact('contacts'));
     }
 
     /**
@@ -45,20 +47,9 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Contact $contact)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return view("contacts.show", compact('contact'));
     }
 
     /**
@@ -68,9 +59,11 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Contact $contact)
     {
-        //
+        $this->contactService->update($contact, $request);
+        $contacts = Contact::Contacts();
+        return view("contacts.index", compact('contacts'));
     }
 
     /**
@@ -79,7 +72,7 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Contact $contact)
     {
         //
     }

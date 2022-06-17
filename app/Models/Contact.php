@@ -4,19 +4,20 @@ namespace App\Models;
 
 use App\Models\Entity;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Contact extends Model
 {
     protected $fillable = [
-        'is_client', 
-        'name', 
-        'siren', 
-        'website_url', 
-        'facebook_url', 
-        'instagram_url', 
+        'is_client',
+        'name',
+        'siren',
+        'website_url',
+        'facebook_url',
+        'instagram_url',
         'note',
         'activity',
         'zip_code',
@@ -24,7 +25,7 @@ class Contact extends Model
         'address',
         'entity_id'
     ];
-    
+
     use HasFactory;
 
     /**
@@ -40,6 +41,12 @@ class Contact extends Model
      * @var bool
      */
     public $incrementing = false;
+
+    public function scopeContacts()
+    {
+        return Contact::where('entity_id', Auth::user()->entity )->get();
+    }
+
 
     public function entity() :BelongsTo
     {

@@ -1,4 +1,4 @@
-<x-modal>
+<x-modal method="{{$contact->id ? 'PUT' : 'POST' }}" form-action="{{$contact->id ? route('contacts.update', $contact) : route('contacts.store')}}">
     <x-slot name="title">
         @if ($contact->id)
             {{ __('Modifier '.$contact->name) }}
@@ -10,7 +10,7 @@
     <x-slot name="content">
         <div class="flex justify-between">
             <div class="mx-1 my-2 flex justify-items-start items-center">
-                <label 
+                <label
                     for="toogleA"
                     class="flex items-center cursor-pointer"
                 >
@@ -35,7 +35,7 @@
                 <x-label for="name" :value="__('Nom')" />
                 <x-input id="name" class="block mt-1 w-full p-2" type="text" name="name" value="{{ old('name', $contact->name) }}" />
             </div>
-            
+
             <div class="mx-2 w-full">
                 <x-label for="activity" :value="__('Domaine d\'activité')" />
                 <x-input id="activity" class="block mt-1 w-full p-2" type="text" name="activity" value="{{ old('activity', $contact->activity) }}" />
@@ -46,7 +46,7 @@
                 <x-label for="address" :value="__('Adresse')" />
                 <x-input id="address" class="block mt-1 w-full p-2" type="text" name="address" value="{{ old('address', $contact->address) }}" />
             </div>
-            
+
             <div class="mx-2 w-full">
                 <x-label for="zip_code" :value="__('Code Postal')" />
                 <x-input id="zip_code" class="block mt-1 w-full p-2" type="text" name="zip_code" value="{{ old('zip_code', $contact->zip_code) }}" />
@@ -81,9 +81,9 @@
     </x-slot>
 
     <x-slot name="buttons">
-        <x-button class="mr-2" wire:click="$emit('closeModal')">
+        <a wire:click="$emit('closeModal')" class='cursor-pointer mr-2 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150'>
             {{ __('Annuler') }}
-        </x-button>
+        </a>
         <x-button class="">
             {{ __('Valider') }}
         </x-button>

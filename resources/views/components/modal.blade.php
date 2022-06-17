@@ -1,8 +1,12 @@
-@props(['formAction' => false])
+@props(['formAction' => false, 'method' =>$method])
 
 <div>
     @if($formAction)
-        <form wire:submit.prevent="{{ $formAction }}">
+        <form method="POST" action="{{ $formAction }}">
+        @if ($method == 'PUT')
+            @method('PUT')
+        @endif
+        @csrf
     @endif
             <div class="bg-white p-4 sm:px-6 sm:py-4 border-b border-gray-150">
                 @if(isset($title))

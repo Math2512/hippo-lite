@@ -15,25 +15,25 @@
                             <svg class="invisible group-hover:visible ml-2 h-3 w-3 text-black"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="4" y1="6" x2="13" y2="6" />  <line x1="4" y1="12" x2="11" y2="12" />  <line x1="4" y1="18" x2="11" y2="18" />  <polyline points="15 15 18 18 21 15" />  <line x1="18" y1="6" x2="18" y2="18" /></svg>
                         </div>
                     </th>
-                    <th wire:click="sortBy('activity')" :direction="$field === 'activity' ? $sortDirection : null" scope="col" class="text-sm font-bold text-gray-900 px-6 text-left py-4 cursor-pointer group invisible md:visible">
+                    <th wire:click="sortBy('activity')" :direction="$field === 'activity' ? $sortDirection : null" scope="col" class="text-sm font-bold text-gray-900 px-6 text-left py-4 cursor-pointer group hidden md:table-cell">
                         <div class="flex items-center ">
                             Activité
                             <svg class="invisible group-hover:visible ml-2 h-3 w-3 text-black"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="4" y1="6" x2="13" y2="6" />  <line x1="4" y1="12" x2="11" y2="12" />  <line x1="4" y1="18" x2="11" y2="18" />  <polyline points="15 15 18 18 21 15" />  <line x1="18" y1="6" x2="18" y2="18" /></svg>
                         </div>
                     </th>
-                    <th wire:click="sortBy('is_client')" :direction="$field === 'is_client' ? $sortDirection : null" scope="col" class="text-sm font-bold text-gray-900 px-6 text-left py-4 cursor-pointer group invisible md:visible">
+                    <th wire:click="sortBy('is_client')" :direction="$field === 'is_client' ? $sortDirection : null" scope="col" class="text-sm font-bold text-gray-900 px-6 text-left py-4 cursor-pointer group hidden md:table-cell">
                         <div class="flex items-center ">
                             Client ?
                             <svg class="invisible group-hover:visible ml-2 h-3 w-3 text-black"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="4" y1="6" x2="13" y2="6" />  <line x1="4" y1="12" x2="11" y2="12" />  <line x1="4" y1="18" x2="11" y2="18" />  <polyline points="15 15 18 18 21 15" />  <line x1="18" y1="6" x2="18" y2="18" /></svg>
                         </div>
                     </th>
-                    <th wire:click="sortBy('updated_at')" :direction="$field === 'updated_at' ? $sortDirection : null" scope="col" class="text-sm font-bold text-gray-900 px-6 text-left py-4 cursor-pointer invisible md:visible">
+                    <th wire:click="sortBy('updated_at')" :direction="$field === 'updated_at' ? $sortDirection : null" scope="col" class="text-sm font-bold text-gray-900 px-6 text-left py-4 cursor-pointer group hidden md:table-cell">
                         <div class="flex items-center ">
                             Date Modification
                             <svg class="invisible group-hover:visible ml-2 h-3 w-3 text-black"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="4" y1="6" x2="13" y2="6" />  <line x1="4" y1="12" x2="11" y2="12" />  <line x1="4" y1="18" x2="11" y2="18" />  <polyline points="15 15 18 18 21 15" />  <line x1="18" y1="6" x2="18" y2="18" /></svg>
                         </div>
                     </th>
-                    <th scope="col" class="text-sm font-bold text-gray-900 px-6 text-left py-4">
+                    <th scope="col" class="text-sm font-bold text-gray-900 px-6 text-left py-4 visi">
                     </th>
                 </tr>
             </thead class="border-b">
@@ -45,16 +45,16 @@
                             <!-- <span class="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-green-500 text-white rounded-full">Success</span>
                             <span class="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-red-600 text-white rounded-full">Danger</span> -->
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap invisible md:visible">
+                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap hidden md:table-cell">
                             {{ $contact->activity }}
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap invisible md:visible">
+                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap hidden md:table-cell">
                             {{ ContactHelper::get_clients($contact) }}
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap invisible md:visible">
+                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap hidden md:table-cell">
                             {{ $contact->updated_at }}
                         </td>
-                        <td class="visible">
+                        <td >
                             <div class="flex justify-end items-center">
                                 <x-button class="mx-1" onclick="Livewire.emit('openModal', 'modal', {{ json_encode(['contact' => $contact]) }})">
                                     <svg class="h-4 w-4 text-white" <svg  width="24"  height="24"  viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" /></svg>
@@ -62,9 +62,9 @@
                                 <x-button class="mx-1">
                                     <svg class="h-4 w-4 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <circle cx="12" cy="12" r="10" />  <line x1="12" y1="8" x2="12" y2="16" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
                                 </x-button>
-                                <x-button class="mx-1">
+                                <a class="mx-1 cursor-pointer inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150" href="{{ route('contacts.show', $contact) }}">
                                     <svg class="h-4 w-4 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />  <circle cx="12" cy="12" r="3" /></svg>
-                                </x-button>
+                                </a>
                             </div>
                         </td>
                     </tr class="bg-white border-b">

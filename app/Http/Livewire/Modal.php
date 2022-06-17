@@ -12,11 +12,11 @@ class Modal extends ModalComponent
     public function mount(Contact $contact){
         $this->contact = $contact;
     }
-    
+
     public function render()
     {
         $contact = new Contact();
         return view('livewire.modal', compact('contact'));
     }
-    
+
 }
