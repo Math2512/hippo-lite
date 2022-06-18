@@ -4,8 +4,10 @@ namespace App\Models;
 
 use App\Models\Entity;
 use Illuminate\Support\Str;
+use App\Models\Interlocutor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -47,10 +49,24 @@ class Contact extends Model
         return Contact::where('entity_id', Auth::user()->entity )->get();
     }
 
-
+    /**
+     * entity
+     *
+     * @return BelongsTo
+     */
     public function entity() :BelongsTo
     {
         return $this->belongsTo(Entity::class);
+    }
+
+    /**
+     * interlocutors
+     *
+     * @return HasMany
+     */
+    public function interlocutors() :HasMany
+    {
+        return $this->hasMany(Interlocutor::class);
     }
 
     protected static function booted(){
